@@ -10,6 +10,9 @@ import RootLayout from './_root/RootLayout'
 // components
 import SigninForm from './_auth/forms/SigninForm'
 import SignupForm from './_auth/forms/SignupForm'
+import { Toaster } from "@/components/ui/toaster"
+
+// Pages
 /* This is named import due to index.ts in _root/pages */
 import { Home } from './_root/pages'
 
@@ -29,6 +32,7 @@ const App = () => {
             <Route index element={<Home />} />
           </Route>
         </Routes>
+        <Toaster />
       </main>
     </>
   )
