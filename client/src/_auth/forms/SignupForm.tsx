@@ -45,6 +45,7 @@ const SignupForm = () => {
         }
 
         // const session = await signInAccount()
+        // console.log(newUser);
     }
 
     return (
