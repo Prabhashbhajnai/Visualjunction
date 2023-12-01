@@ -8,7 +8,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import Loader from "@/components/ui/shared/Loader"
+import Loader from "@/components/shared/Loader"
 
 // Validation
 import { SigninValidation } from "@/lib/validation"
