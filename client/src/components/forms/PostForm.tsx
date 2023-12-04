@@ -1,21 +1,37 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { Models } from "appwrite"
+import { useNavigate } from "react-router-dom"
 
+// Components
+import { useToast } from "../ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
 import FileUploader from "../shared/FileUploader"
+
+// Validation
 import { PostValidation } from "@/lib/validation"
-import { Models } from "appwrite"
+
+// Query and Mutations
+import { useCreatePost } from "@/lib/react-query/queriesAndMutations"
+
+// Context
+import { useUserContext } from "@/context/AuthContext"
+
 
 type PostFormProps = {
     post?: Models.Document
 }
 
 const PostForm = ({ post }: PostFormProps) => {
-    // const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost()
+    const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost()
+
+    const { user } = useUserContext()
+    const { toast } = useToast()
+    const navigate = useNavigate()
 
     const form = useForm<z.infer<typeof PostValidation>>({
         resolver: zodResolver(PostValidation),
@@ -28,10 +44,19 @@ const PostForm = ({ post }: PostFormProps) => {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof PostValidation>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof PostValidation>) {
+        const newPost = await createPost({
+            ...values,
+            userId: user.id
+        })
+
+        if (!newPost) {
+            toast({
+                title: "Please Try Again",
+            })
+        }
+
+        navigate('/')
     }
 
     return (

@@ -1,7 +1,6 @@
 // component
 import PostForm from "@/components/forms/PostForm"
 
-
 const CreatePost = () => {
     return (
         <>
