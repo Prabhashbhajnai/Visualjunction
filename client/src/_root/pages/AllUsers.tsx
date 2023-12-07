@@ -23,17 +23,15 @@ const AllUsers = () => {
         <>
             <div className='common-container'>
                 <h2 className="h3-bold md:h2-bold text-left w-full">All Users</h2>
-                {isFetchingNextPage && !users ? (
-                    <Loader />
-                ) : (
-                    <ul className='user-grid'>
-                        {users?.pages.map((user, index) => (
-                            <UserCard
-                                users={user.documents}
-                            />
-                        ))}
-                    </ul>
-                )}
+
+                <ul className='user-grid'>
+                    {users?.pages.map((user, index) => (
+                        <UserCard
+                            users={user.documents}
+                            key={`page-${index}`}
+                        />
+                    ))}
+                </ul>
 
                 {hasNextPage && (
                     <div ref={ref} className='mt-10'>
