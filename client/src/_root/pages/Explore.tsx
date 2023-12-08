@@ -14,9 +14,7 @@ import Loader from '@/components/shared/Loader'
 
 const Explore = () => {
     const { ref, inView } = useInView();
-    const { data: posts, fetchNextPage, hasNextPage } = useGetPosts()
-    console.log(posts);
-    
+    const { data: posts, fetchNextPage, hasNextPage } = useGetPosts()    
 
     const [searchValue, setSearchValue] = useState('')
 

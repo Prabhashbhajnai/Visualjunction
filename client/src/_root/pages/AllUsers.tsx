@@ -11,8 +11,7 @@ import Loader from '@/components/shared/Loader';
 const AllUsers = () => {
     const { ref, inView } = useInView();
 
-    const { data: users, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetInfiniteUsers()
-    console.log(users);
+    const { data: users, fetchNextPage, hasNextPage } = useGetInfiniteUsers()
 
     useEffect(() => {
         if (inView)
