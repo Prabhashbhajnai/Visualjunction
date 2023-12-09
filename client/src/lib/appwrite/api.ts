@@ -412,9 +412,6 @@ export async function getUserById(userId: string) {
 export async function updateProfile(user: IUpdateUser) {
     const hasFileToUpdate = user.file.length > 0
 
-    // console.log(user);
-
-
     try {
         let image = {
             imageUrl: user.imageUrl,

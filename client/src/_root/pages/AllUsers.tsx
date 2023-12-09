@@ -23,7 +23,7 @@ const AllUsers = () => {
             <div className='common-container'>
                 <h2 className="h3-bold md:h2-bold text-left w-full">All Users</h2>
 
-                <ul className='user-grid'>
+                <ul className='user-container gap-10'>
                     {users?.pages.map((user, index) => (
                         <UserCard
                             users={user.documents}

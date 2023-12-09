@@ -11,8 +11,7 @@ type userCardProp = {
 const UserCard = ({ users }: userCardProp) => {
     return (
         <>
-            <div className='flex flex-wrap'>
-                <ul className='user-container'>
+            <div className='flex flex-wrap gap-10'>
                     {users.map((user) => (
                         <li className='flex-1 min-w-[200px] w-full' key={user.$id}>
                             <Link to={`/profile/${user.$id}`} className='user-card'>
@@ -38,7 +37,6 @@ const UserCard = ({ users }: userCardProp) => {
                             </Link>
                         </li>
                     ))}
-                </ul>
             </div>
         </>
     )

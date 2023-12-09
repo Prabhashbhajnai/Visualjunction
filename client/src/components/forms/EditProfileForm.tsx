@@ -32,8 +32,6 @@ type UserProfileProps = {
 
 const EditProfileForm = ({ user }: UserProfileProps) => {
     const navigate = useNavigate()
-    console.log(user);
-    
 
     const { mutateAsync: updateProfile, isPending: isLoadingUpdate } = useUpdateProfile()
 

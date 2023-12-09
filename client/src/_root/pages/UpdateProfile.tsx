@@ -6,8 +6,6 @@ import EditProfileForm from '@/components/forms/EditProfileForm'
 
 const UpdateProfile = () => {
     const { data: currentUser } = useGetCurrentUser()
-    // console.log(currentUser);
-    
 
     return (
         <div className='flex flex-1'>

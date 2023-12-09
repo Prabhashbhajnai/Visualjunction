@@ -40,11 +40,11 @@ const Profile = () => {
                 <div className="lg:flex items-start justify-items-start w-full gap-x-20">
 
                     {/* Profile image div */}
-                    <div className="flex xl:flex-row flex-col max-xl:items-center w-28 h-28 lg:h-36 lg:w-36">
+                    <div className="flex xl:flex-row flex-col max-xl:items-center">
                         <img
                             src={openUser?.imageUrl || '/assets/icons/profile-placeholder.svg'}
                             alt="profile"
-                            className="w-full h-full rounded-full"
+                            className=" w-28 h-28 lg:h-36 lg:w-36 rounded-full"
                         />
                     </div>
 
