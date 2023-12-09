@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
 import FileUploader from "../shared/FileUploader"
+import Loader from "../shared/Loader"
 
 // Validation
 import { PostValidation } from "@/lib/validation"
@@ -20,7 +21,6 @@ import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutati
 
 // Context
 import { useUserContext } from "@/context/AuthContext"
-
 
 type PostFormProps = {
     post?: Models.Document
@@ -168,7 +168,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                         className="shad-button_primary whitespace-nowrap"
                         disabled={isLoadingCreate || isLoadingUpdate}
                     >
-                        {isLoadingCreate || isLoadingUpdate && 'Loading...'}
+                        {isLoadingCreate || isLoadingUpdate && <Loader />}
                         {action} Post
                     </Button>
                 </div>

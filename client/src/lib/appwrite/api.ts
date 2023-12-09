@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 // types
-import { INewPost, INewUser, IUpdatePost } from "@/types";
+import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 
 export async function createUserAccount(user: INewUser) {
@@ -404,6 +404,66 @@ export async function getUserById(userId: string) {
         if (!user) throw Error
 
         return user
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function updateProfile(user: IUpdateUser) {
+    const hasFileToUpdate = user.file.length > 0
+
+    // console.log(user);
+
+
+    try {
+        let image = {
+            imageUrl: user.imageUrl,
+            imageId: user.imageId
+        }
+
+        if (hasFileToUpdate) {
+            // upload image to storage
+            const uploadedFile = await uploadFile(user.file[0])
+
+            if (!uploadedFile) throw Error
+
+            // get file url
+            const fileUrl = getFilePreviewUrl(uploadedFile.$id)
+
+            if (!fileUrl) {
+                deleteFile(uploadedFile.$id)
+                throw Error
+            }
+
+            image = {
+                ...image,
+                imageUrl: fileUrl,
+                imageId: uploadedFile.$id
+            }
+        }
+
+        const updatedUser = await databases.updateDocument(
+            appwriteConfig.databaseId,
+            appwriteConfig.userCollectionId,
+            user.userId,
+            {
+                name: user.name,
+                imageUrl: image.imageUrl,
+                imageId: image.imageId,
+                bio: user.bio,
+            }
+        )
+
+        if (!updatedUser) {
+            await deleteFile(user.imageId)
+            throw Error
+        }
+
+        const updateName = await account.updateName(user.name)
+
+        if (!updateName) throw Error
+
+        return updatedUser
     } catch (error) {
         console.log(error);
     }
