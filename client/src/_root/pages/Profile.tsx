@@ -7,6 +7,7 @@ import { useUserContext } from "@/context/AuthContext"
 // Components
 import { Button } from "@/components/ui/button";
 import GridPostList from "@/components/shared/GridPostList";
+import Loader from "@/components/shared/Loader";
 
 interface StabBlockProps {
     value: string | number;
@@ -27,8 +28,6 @@ const Profile = () => {
     // get current user id to check if on own profile page
     const { user: currentUser } = useUserContext()
     const { data: openUser, isPending: isLoadingUser } = useGetUserById(id || '')
-    // console.log(currentUser);
-    console.log(openUser?.liked);
 
     // to check if on liked posts page
     // if yes then change the tab color
@@ -130,6 +129,9 @@ const Profile = () => {
                         Liked
                     </Link>
                 </div>
+                
+                {/* Loader */}
+                {!openUser && isLoadingUser && <Loader />}
 
                 <Routes>
                     <Route index element={<GridPostList posts={openUser?.posts} />} />
