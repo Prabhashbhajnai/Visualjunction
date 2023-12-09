@@ -159,6 +159,10 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     <Button
                         type="button"
                         className="shad-button_dark_4"
+                        {...action === 'Update' ?
+                            { onClick: () => navigate(`/posts/${post?.$id}`) }
+                            : { onClick: () => navigate('/') }
+                        }
                     >
                         Cancel
                     </Button>
@@ -173,7 +177,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
                     </Button>
                 </div>
             </form>
-        </Form>
+        </Form >
     )
 }
 

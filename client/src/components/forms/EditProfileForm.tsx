@@ -122,6 +122,7 @@ const EditProfileForm = ({ user }: UserProfileProps) => {
                     <Button
                         type="button"
                         className="shad-button_dark_4"
+                        onClick={() => navigate(`/profile/${user?.$id}`)}
                     >
                         Cancel
                     </Button>
